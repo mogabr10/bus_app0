@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/constants/app_spacing.dart';
-import '../../../../core/router/route_names.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../shared/widgets/app_button.dart';
@@ -115,9 +114,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           });
           if (user != null) {
             if (user.role == UserRole.parent) {
-              context.go(RouteNames.parentHome);
+              context.go('/parent/home');
             } else {
-              context.go(RouteNames.supervisorHome);
+              context.go('/supervisor/home');
             }
           }
         },

@@ -9,17 +9,14 @@ import '../../features/booking/presentation/screens/booking_screen.dart';
 import '../../features/chat/presentation/screens/chat_screen.dart';
 import '../../features/live_tracking/presentation/screens/live_tracking_screen.dart';
 import '../../features/notifications/presentation/screens/notifications_screen.dart';
-import '../../features/parent_dashboard/presentation/screens/parent_dashboard_screen.dart';
+import '../../features/parent/presentation/screens/parent_home_screen.dart';
 import '../../features/payments/presentation/screens/payment_screen.dart';
 import '../../features/splash/presentation/screens/splash_screen.dart';
 import '../../features/students/presentation/screens/student_list_screen.dart';
 import '../../features/supervisor_dashboard/presentation/screens/supervisor_dashboard_screen.dart';
-import '../../shared/widgets/app_scaffold.dart';
 import 'route_names.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
-final _parentShellNavigatorKey = GlobalKey<NavigatorState>();
-final _supervisorShellNavigatorKey = GlobalKey<NavigatorState>();
 
 final goRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
@@ -46,97 +43,67 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         name: RouteNames.forgotPassword,
         builder: (context, state) => const ForgotPasswordScreen(),
       ),
-      ShellRoute(
-        navigatorKey: _parentShellNavigatorKey,
-        builder: (context, state, child) {
-          return AppScaffold(
-            currentNavIndex: 0,
-            onNavTap: (index) {},
-            body: child,
-          );
-        },
-        routes: [
-          GoRoute(
-            path: RoutePaths.parentHome,
-            name: RouteNames.parentHome,
-            builder: (context, state) => const ParentDashboardScreen(),
-            routes: [
-              GoRoute(
-                path: RoutePaths.parentLiveTracking,
-                name: RouteNames.parentLiveTracking,
-                parentNavigatorKey: _rootNavigatorKey,
-                builder: (context, state) => const LiveTrackingScreen(),
-              ),
-              GoRoute(
-                path: RoutePaths.parentStudentList,
-                name: RouteNames.parentStudentList,
-                parentNavigatorKey: _rootNavigatorKey,
-                builder: (context, state) => const StudentListScreen(),
-              ),
-              GoRoute(
-                path: RoutePaths.parentChat,
-                name: RouteNames.parentChat,
-                parentNavigatorKey: _rootNavigatorKey,
-                builder: (context, state) => const ChatScreen(),
-              ),
-            ],
-          ),
-          GoRoute(
-            path: RoutePaths.booking,
-            name: RouteNames.parentBooking,
-            builder: (context, state) => const BookingScreen(),
-          ),
-          GoRoute(
-            path: RoutePaths.notifications,
-            name: RouteNames.parentNotifications,
-            builder: (context, state) => const NotificationsScreen(),
-          ),
-          GoRoute(
-            path: RoutePaths.payments,
-            name: RouteNames.parentPayments,
-            builder: (context, state) => const PaymentScreen(),
-          ),
-        ],
+      // Parent routes
+      GoRoute(
+        path: '/parent/home',
+        name: RouteNames.parentHome,
+        builder: (context, state) => const ParentHomeScreen(),
       ),
-      ShellRoute(
-        navigatorKey: _supervisorShellNavigatorKey,
-        builder: (context, state, child) {
-          return AppScaffold(
-            currentNavIndex: 0,
-            onNavTap: (index) {},
-            body: child,
-          );
-        },
-        routes: [
-          GoRoute(
-            path: RoutePaths.supervisorHome,
-            name: RouteNames.supervisorHome,
-            builder: (context, state) => const SupervisorDashboardScreen(),
-            routes: [
-              GoRoute(
-                path: RoutePaths.supervisorLiveTracking,
-                name: RouteNames.supervisorLiveTracking,
-                parentNavigatorKey: _rootNavigatorKey,
-                builder: (context, state) => const LiveTrackingScreen(),
-              ),
-            ],
-          ),
-          GoRoute(
-            path: RoutePaths.booking,
-            name: RouteNames.supervisorBooking,
-            builder: (context, state) => const BookingScreen(),
-          ),
-          GoRoute(
-            path: RoutePaths.notifications,
-            name: RouteNames.supervisorNotifications,
-            builder: (context, state) => const NotificationsScreen(),
-          ),
-          GoRoute(
-            path: RoutePaths.payments,
-            name: RouteNames.supervisorPayments,
-            builder: (context, state) => const PaymentScreen(),
-          ),
-        ],
+      GoRoute(
+        path: '/parent/booking',
+        name: RouteNames.parentBooking,
+        builder: (context, state) => const BookingScreen(),
+      ),
+      GoRoute(
+        path: '/parent/notifications',
+        name: RouteNames.parentNotifications,
+        builder: (context, state) => const NotificationsScreen(),
+      ),
+      GoRoute(
+        path: '/parent/payments',
+        name: RouteNames.parentPayments,
+        builder: (context, state) => const PaymentScreen(),
+      ),
+      GoRoute(
+        path: '/parent/live-tracking',
+        name: RouteNames.parentLiveTracking,
+        builder: (context, state) => const LiveTrackingScreen(),
+      ),
+      GoRoute(
+        path: '/parent/student-list',
+        name: RouteNames.parentStudentList,
+        builder: (context, state) => const StudentListScreen(),
+      ),
+      GoRoute(
+        path: '/parent/chat',
+        name: RouteNames.parentChat,
+        builder: (context, state) => const ChatScreen(),
+      ),
+      // Supervisor routes
+      GoRoute(
+        path: '/supervisor/home',
+        name: RouteNames.supervisorHome,
+        builder: (context, state) => const SupervisorDashboardScreen(),
+      ),
+      GoRoute(
+        path: '/supervisor/booking',
+        name: RouteNames.supervisorBooking,
+        builder: (context, state) => const BookingScreen(),
+      ),
+      GoRoute(
+        path: '/supervisor/notifications',
+        name: RouteNames.supervisorNotifications,
+        builder: (context, state) => const NotificationsScreen(),
+      ),
+      GoRoute(
+        path: '/supervisor/payments',
+        name: RouteNames.supervisorPayments,
+        builder: (context, state) => const PaymentScreen(),
+      ),
+      GoRoute(
+        path: '/supervisor/live-tracking',
+        name: RouteNames.supervisorLiveTracking,
+        builder: (context, state) => const LiveTrackingScreen(),
       ),
     ],
   );

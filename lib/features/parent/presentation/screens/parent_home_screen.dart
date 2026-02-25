@@ -19,9 +19,10 @@ import '../../../../shared/widgets/app_scaffold.dart';
 /// - Bottom Navigation Bar
 ///
 /// TODO: Integrate with Riverpod state management
-///       - Load active trip data
-///       - Load notifications
-///       - Handle navigation
+///       - Load active trip data from backend
+///       - Load user profile (name)
+///       - Load notifications list
+///       - Handle navigation with GoRouter
 class ParentHomeScreen extends StatefulWidget {
   const ParentHomeScreen({super.key});
 
@@ -35,11 +36,10 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
   // TODO: Replace with actual state from Riverpod
   // final activeTrip = ref.watch(activeTripProvider);
   // final notifications = ref.watch(notificationsProvider);
+  // final parentProfile = ref.watch(parentProfileProvider);
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return AppScaffold(
       titleWidget: _buildHeader(context),
       currentNavIndex: _currentNavIndex,
@@ -66,58 +66,72 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
           label: 'الحساب',
         ),
       ],
-      navBadgeIndices: const {2}, // Notifications tab has badge
+      navBadgeIndices: const {2},
       body: _buildBody(context),
     );
   }
 
+  // ─────────────────────────────────────────────────────────────────────────────
+  // Header Section
+  // ─────────────────────────────────────────────────────────────────────────────
+
   Widget _buildHeader(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [_buildGreeting(context), _buildNotificationButton(context)],
+    );
+  }
+
+  Widget _buildGreeting(BuildContext context) {
+    final brightness = Theme.of(context).brightness;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'مرحباً',
-              style: AppTextStyles.labelMedium.copyWith(
-                color: AppColors.textSub(Theme.of(context).brightness),
-              ),
-            ),
-            const SizedBox(height: AppSpacing.xxs),
-            // TODO: Replace with user name from state
-            // Text(parent.name, ...)
-            Text(
-              'أحمد',
-              style: AppTextStyles.headlineMedium.copyWith(
-                color: AppColors.textMain(Theme.of(context).brightness),
-              ),
-            ),
-          ],
-        ),
-        // Notification bell button
-        Container(
-          width: AppSpacing.buttonHeightSm,
-          height: AppSpacing.buttonHeightSm,
-          decoration: BoxDecoration(
-            color: AppColors.surface(Theme.of(context).brightness),
-            borderRadius: AppSpacing.borderRadiusMd,
-            border: Border.all(
-              color: AppColors.border(Theme.of(context).brightness),
-            ),
+        Text(
+          'مرحباً',
+          style: AppTextStyles.labelMedium.copyWith(
+            color: AppColors.textSub(brightness),
           ),
-          child: IconButton(
-            icon: const Icon(Icons.notifications_outlined),
-            iconSize: AppSpacing.iconMd,
-            color: AppColors.textSub(Theme.of(context).brightness),
-            onPressed: () {
-              // TODO: Navigate to notifications
-            },
+        ),
+        const SizedBox(height: AppSpacing.xxs),
+        // TODO: Replace with parent name from state
+        // Text(parentProfile.name, ...)
+        Text(
+          'أحمد',
+          style: AppTextStyles.headlineMedium.copyWith(
+            color: AppColors.textMain(brightness),
           ),
         ),
       ],
     );
   }
+
+  Widget _buildNotificationButton(BuildContext context) {
+    final brightness = Theme.of(context).brightness;
+
+    return Container(
+      width: AppSpacing.buttonHeightSm,
+      height: AppSpacing.buttonHeightSm,
+      decoration: BoxDecoration(
+        color: AppColors.surface(brightness),
+        borderRadius: AppSpacing.borderRadiusMd,
+        border: Border.all(color: AppColors.border(brightness)),
+      ),
+      child: IconButton(
+        icon: const Icon(Icons.notifications_outlined),
+        iconSize: AppSpacing.iconMd,
+        color: AppColors.textSub(brightness),
+        onPressed: () {
+          // TODO: Navigate to notifications screen
+        },
+      ),
+    );
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // Body Section
+  // ─────────────────────────────────────────────────────────────────────────────
 
   Widget _buildBody(BuildContext context) {
     return SingleChildScrollView(
@@ -127,29 +141,54 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // ── Active Trip Status Card ────────────────────────────────────────
-          _buildActiveTripSection(context),
-          
+        children: const [
+          // Active Trip Status Card
+          _ActiveTripSection(),
+
           SizedBox(height: AppSpacing.xl),
 
-          // ── Quick Actions Grid ────────────────────────────────────────────
-          _buildQuickActionsSection(context),
-          
+          // Quick Actions Grid
+          _QuickActionsSection(),
+
           SizedBox(height: AppSpacing.xl),
 
-          // ── Recent Notifications ──────────────────────────────────────────
-          _buildNotificationsSection(context),
+          // Recent Notifications
+          _NotificationsSection(),
         ],
       ),
     );
   }
 
-  Widget _buildActiveTripSection(BuildContext context) {
+  // ─────────────────────────────────────────────────────────────────────────────
+  // Navigation Handler
+  // ─────────────────────────────────────────────────────────────────────────────
+
+  void _onNavTap(int index) {
+    // TODO: Handle navigation with GoRouter
+    // context.go(navRoutes[index]);
+    setState(() => _currentNavIndex = index);
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Active Trip Section
+// ─────────────────────────────────────────────────────────────────────────────
+
+/// Widget displaying the active trip status card.
+///
+/// TODO: Integrate with activeTripProvider
+///       - Show loading state while fetching
+///       - Handle empty state when no active trip
+///       - Update progress in real-time
+class _ActiveTripSection extends StatelessWidget {
+  const _ActiveTripSection();
+
+  @override
+  Widget build(BuildContext context) {
     // TODO: Replace with actual trip data from state
     // if (activeTrip == null) return _buildNoActiveTrip(context);
-    
-    return StatusCard(
+
+    return const StatusCard(
       title: 'الحافلة رقم ٥',
       subtitle: 'السائق: محمد أحمد',
       statusLabel: 'نشط الآن',
@@ -161,38 +200,55 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
       primaryAction: StatusCardAction(
         label: 'تتبع مباشر',
         icon: Icons.location_on,
-        onPressed: () {
-          // TODO: Navigate to live tracking
-        },
+        onPressed: _navigateToLiveTracking,
       ),
       secondaryAction: StatusCardAction(
         label: 'تفاصيل الرحلة',
-        onPressed: () {
-          // TODO: Navigate to trip details
-        },
+        onPressed: _navigateToTripDetails,
       ),
-      onTap: () {
-        // TODO: Navigate to trip details
-      },
+      onTap: _navigateToTripDetails,
     );
   }
 
-  Widget _buildQuickActionsSection(BuildContext context) {
+  static void _navigateToLiveTracking() {
+    // TODO: Navigate to live tracking screen
+  }
+
+  static void _navigateToTripDetails() {
+    // TODO: Navigate to trip details screen
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Quick Actions Section
+// ─────────────────────────────────────────────────────────────────────────────
+
+/// Widget displaying quick action grid.
+///
+/// TODO: Integrate with navigation routes
+///       - Use GoRouter for navigation
+///       - Pass selected student ID where needed
+class _QuickActionsSection extends StatelessWidget {
+  const _QuickActionsSection();
+
+  @override
+  Widget build(BuildContext context) {
+    final brightness = Theme.of(context).brightness;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Section title
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppSpacing.xs),
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xs),
           child: Text(
             'إجراءات سريعة',
             style: AppTextStyles.headlineLarge.copyWith(
-              color: AppColors.textMain(Theme.of(context).brightness),
+              color: AppColors.textMain(brightness),
             ),
           ),
         ),
-        
-        SizedBox(height: AppSpacing.base),
+        const SizedBox(height: AppSpacing.base),
 
         // Actions grid
         GridView.count(
@@ -202,34 +258,26 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
           mainAxisSpacing: AppSpacing.md,
           crossAxisSpacing: AppSpacing.md,
           childAspectRatio: 1.5,
-          children: [
+          children: const [
             _QuickActionCard(
               icon: Icons.people_alt_outlined,
               label: 'طلابك',
-              onTap: () {
-                // TODO: Navigate to student list
-              },
+              onTap: _navigateToStudents,
             ),
             _QuickActionCard(
               icon: Icons.map_outlined,
               label: 'تتبع الحافلات',
-              onTap: () {
-                // TODO: Navigate to live tracking
-              },
+              onTap: _navigateToLiveTracking,
             ),
             _QuickActionCard(
               icon: Icons.payment_outlined,
               label: 'الدفع',
-              onTap: () {
-                // TODO: Navigate to payments
-              },
+              onTap: _navigateToPayments,
             ),
             _QuickActionCard(
               icon: Icons.chat_outlined,
               label: 'المحادثة',
-              onTap: () {
-                // TODO: Navigate to chat
-              },
+              onTap: _navigateToChat,
             ),
           ],
         ),
@@ -237,96 +285,20 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
     );
   }
 
-  Widget _buildNotificationsSection(BuildContext context) {
-    // TODO: Replace with actual notifications from state
-    final notifications = _getSampleNotifications();
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Section header
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppSpacing.xs),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'الإشعارات الأخيرة',
-                style: AppTextStyles.headlineLarge.copyWith(
-                  color: AppColors.textMain(Theme.of(context).brightness),
-                ),
-              ),
-              TextButton(
-                onPressed: () {
-                  // TODO: Navigate to all notifications
-                },
-                child: Text(
-                  'عرض الكل',
-                  style: AppTextStyles.labelMedium.copyWith(
-                    color: AppColors.primary,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        
-        SizedBox(height: AppSpacing.base),
-
-        // Notifications list
-        ListView.separated(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: notifications.length,
-          separatorBuilder: (_, __) => SizedBox(height: AppSpacing.md),
-          itemBuilder: (context, index) {
-            final notification = notifications[index];
-            return NotificationCard(
-              title: notification['title'] as String,
-              description: notification['description'] as String,
-              timestamp: notification['timestamp'] as String,
-              type: notification['type'] as NotificationType,
-              isUnread: notification['isUnread'] as bool,
-              onTap: () {
-                // TODO: Handle notification tap
-              },
-            );
-          },
-        ),
-      ],
-    );
+  static void _navigateToStudents() {
+    // TODO: Navigate to student list screen
   }
 
-  List<Map<String, dynamic>> _getSampleNotifications() {
-    return [
-      {
-        'title': 'وصول الطالب',
-        'description': 'تم وصول أحمد إلى المدرسة بنجاح',
-        'timestamp': 'منذ ٣٠ دقيقة',
-        'type': NotificationType.studentArrived,
-        'isUnread': true,
-      },
-      {
-        'title': 'تأخر الحافلة',
-        'description': 'الحافلة ستتأخر ١٥ دقيقة عن الموعد المحدد',
-        'timestamp': 'منذ ساعة',
-        'type': NotificationType.busDelayed,
-        'isUnread': true,
-      },
-      {
-        'title': 'موعد الدفع',
-        'description': 'موعد تجديد الاشتراك الشهري غداً',
-        'timestamp': 'منذ ٢ ساعة',
-        'type': NotificationType.paymentSuccess,
-        'isUnread': false,
-      },
-    ];
+  static void _navigateToLiveTracking() {
+    // TODO: Navigate to live tracking screen
   }
 
-  void _onNavTap(int index) {
-    // TODO: Handle navigation based on index
-    // This should integrate with GoRouter
-    setState(() => _currentNavIndex = index);
+  static void _navigateToPayments() {
+    // TODO: Navigate to payment screen
+  }
+
+  static void _navigateToChat() {
+    // TODO: Navigate to chat screen
   }
 }
 
@@ -356,9 +328,7 @@ class _QuickActionCard extends StatelessWidget {
           padding: AppSpacing.cardPadding,
           decoration: BoxDecoration(
             borderRadius: AppSpacing.borderRadiusLg,
-            border: Border.all(
-              color: AppColors.border(brightness),
-            ),
+            border: Border.all(color: AppColors.border(brightness)),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -376,7 +346,7 @@ class _QuickActionCard extends StatelessWidget {
                   size: AppSpacing.iconMd,
                 ),
               ),
-              SizedBox(height: AppSpacing.sm),
+              const SizedBox(height: AppSpacing.sm),
               Text(
                 label,
                 style: AppTextStyles.labelLarge.copyWith(
@@ -389,5 +359,109 @@ class _QuickActionCard extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Notifications Section
+// ─────────────────────────────────────────────────────────────────────────────
+
+/// Widget displaying recent notifications list.
+///
+/// TODO: Integrate with notificationsProvider
+///       - Load actual notifications from backend
+///       - Handle pagination for long lists
+///       - Mark as read on tap
+class _NotificationsSection extends StatelessWidget {
+  const _NotificationsSection();
+
+  @override
+  Widget build(BuildContext context) {
+    final brightness = Theme.of(context).brightness;
+
+    // TODO: Replace with actual notifications from state
+    final notifications = _getSampleNotifications();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Section header
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xs),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'الإشعارات الأخيرة',
+                style: AppTextStyles.headlineLarge.copyWith(
+                  color: AppColors.textMain(brightness),
+                ),
+              ),
+              TextButton(
+                onPressed: _navigateToAllNotifications,
+                child: Text(
+                  'عرض الكل',
+                  style: AppTextStyles.labelMedium.copyWith(
+                    color: AppColors.primary,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: AppSpacing.base),
+
+        // Notifications list
+        ListView.separated(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: notifications.length,
+          separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.md),
+          itemBuilder: (context, index) {
+            final notification = notifications[index];
+            return NotificationCard(
+              title: notification['title'] as String,
+              description: notification['description'] as String,
+              timestamp: notification['timestamp'] as String,
+              type: notification['type'] as NotificationType,
+              isUnread: notification['isUnread'] as bool,
+              onTap: () {
+                // TODO: Handle notification tap
+              },
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  static void _navigateToAllNotifications() {
+    // TODO: Navigate to all notifications screen
+  }
+
+  List<Map<String, dynamic>> _getSampleNotifications() {
+    return [
+      {
+        'title': 'وصول الطالب',
+        'description': 'تم وصول أحمد إلى المدرسة بنجاح',
+        'timestamp': 'منذ ٣٠ دقيقة',
+        'type': NotificationType.studentArrived,
+        'isUnread': true,
+      },
+      {
+        'title': 'تأخر الحافلة',
+        'description': 'الحافلة ستتأخر ١٥ دقيقة عن الموعد المحدد',
+        'timestamp': 'منذ ساعة',
+        'type': NotificationType.busDelayed,
+        'isUnread': true,
+      },
+      {
+        'title': 'موعد الدفع',
+        'description': 'موعد تجديد الاشتراك الشهري غداً',
+        'timestamp': 'منذ ٢ ساعة',
+        'type': NotificationType.paymentSuccess,
+        'isUnread': false,
+      },
+    ];
   }
 }
