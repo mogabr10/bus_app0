@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Parent Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "primary-content": "#ffffff",
+                        "primary-light": "#eef4ff",
+                        "primary-dark": "#0b3fa8",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1c1f27",
+                        "text-main-light": "#0f172a",
+                        "text-main-dark": "#f8fafc",
+                        "text-sub-light": "#64748b",
+                        "text-sub-dark": "#94a3b8",
+                        "border-light": "#e2e8f0",
+                        "border-dark": "#282e39",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-text-main-light dark:text-text-main-dark antialiased">
+<div class="relative flex min-h-screen flex-col overflow-hidden mx-auto max-w-md shadow-2xl bg-background-light dark:bg-background-dark">
+<!-- Header -->
+<header class="flex items-center justify-between p-5 pb-2">
+<div class="flex flex-col">
+<p class="text-text-sub-light dark:text-text-sub-dark text-sm font-medium">مرحباً بك 👋</p>
+<h2 class="text-xl font-bold tracking-tight">أحمد محمد</h2>
+</div>
+<div class="relative">
+<div class="h-12 w-12 rounded-full bg-surface-light dark:bg-surface-dark p-0.5 shadow-sm overflow-hidden">
+<img alt="User Profile" class="h-full w-full rounded-full object-cover" data-alt="Portrait of a smiling man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5bm8aTJXr3q-WC0vbg0myqZ9E91_3y9-WoVG9712E37NClAajjnM8R33Tv5cEXgFshsVcCCFJ8UiGAYQ0gloDc5vTgKdzkkrrFbHIlak9u7phlrHo8ve0YNpf9X5Gg-SxU3L5J1qFI6NCfEpGvJS689747CNp5d5DCo9uTUWntmdaO79B8a5nfSwZRrOfarFsoEUkzMZzKxeBLzr88N-w8x_Xp-Xd7a447VlT9OOiECbE_SCSHPSKuk_C2NU8MLkUHJaYrWsaZEU"/>
+</div>
+<div class="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-background-light dark:border-background-dark bg-green-500"></div>
+</div>
+</header>
+<!-- Main Content Scroll Area -->
+<main class="flex-1 overflow-y-auto pb-24 px-4 space-y-6">
+<!-- Active Trip Card -->
+<section class="mt-4">
+<div class="rounded-2xl bg-surface-light dark:bg-surface-dark shadow-sm border border-border-light dark:border-border-dark overflow-hidden">
+<!-- Map Preview -->
+<div class="relative h-32 w-full bg-gray-200 dark:bg-gray-800">
+<div class="absolute inset-0 bg-cover bg-center opacity-80" data-alt="Map view of city streets" data-location="Riyadh" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCl7OEeyOUaybIOX7i-sxoGDrFSxOc2N0KUGoI0HpSKpkpi5GmlkKVXY3byrFs8OwjTw_qsxeNCpjpt5SDYnV2NH2IbL7r6F_BNZmQRtePpdb8tFpf9yV24aj-34gJCESLPLVyfKj5zW92FPtXpN84EjYEcoAi4Gt-q1ZaIFsBTPohBQ3UjhTGVuiL8c97vhx-lTfFPiq2e4skm5y5zAn63EVgtdvgJid0BzrVU1czGIQf3AcLxrRjyfiDKUI3gpxoMwQOR0Sq_uWg');">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-light dark:from-surface-dark via-transparent to-transparent"></div>
+<div class="absolute bottom-3 right-4 flex items-center gap-2">
+<span class="px-2 py-1 rounded-lg bg-green-500/20 text-green-600 dark:text-green-400 text-xs font-bold backdrop-blur-sm border border-green-500/30">
+                                نشط الآن
+                            </span>
+</div>
+</div>
+<div class="p-5 pt-2">
+<div class="flex items-center justify-between mb-4">
+<div>
+<h3 class="text-lg font-bold">في الطريق إلى المنزل</h3>
+<p class="text-text-sub-light dark:text-text-sub-dark text-sm">الحافلة رقم #٤٠٢ • السائق: محمد علي</p>
+</div>
+<div class="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">directions_bus</span>
+</div>
+</div>
+<!-- Progress -->
+<div class="mb-2 flex justify-between items-end">
+<span class="text-sm font-medium">المسافة المتبقية</span>
+<span class="text-primary font-bold text-sm">5 دقائق</span>
+</div>
+<div class="relative h-2 w-full rounded-full bg-background-light dark:bg-gray-700">
+<div class="absolute right-0 top-0 h-full w-[75%] rounded-full bg-primary"></div>
+</div>
+<!-- Actions -->
+<div class="mt-6 flex gap-3">
+<button class="flex-1 bg-primary hover:bg-primary-dark text-white h-10 rounded-xl font-medium text-sm flex items-center justify-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+                                الموقع المباشر
+                            </button>
+<button class="flex-1 bg-background-light dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-text-main-light dark:text-text-main-dark h-10 rounded-xl font-medium text-sm flex items-center justify-center gap-2 transition-colors border border-border-light dark:border-border-dark">
+<span class="material-symbols-outlined text-[18px]">call</span>
+                                اتصال بالسائق
+                            </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Actions Grid -->
+<section>
+<h3 class="text-lg font-bold mb-3 px-1">الوصول السريع</h3>
+<div class="grid grid-cols-2 gap-3">
+<button class="flex flex-col items-start p-4 rounded-2xl bg-yellow-500/10 dark:bg-yellow-500/5 border border-yellow-500/20 hover:bg-yellow-500/20 transition-colors group">
+<div class="h-10 w-10 rounded-full bg-yellow-500 text-white flex items-center justify-center mb-3 shadow-sm group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">calendar_month</span>
+</div>
+<span class="font-bold text-base text-gray-900 dark:text-gray-100">حجز للغد</span>
+<span class="text-xs text-text-sub-light dark:text-text-sub-dark mt-1">تعديل جدول الرحلات</span>
+</button>
+<button class="flex flex-col items-start p-4 rounded-2xl bg-blue-500/10 dark:bg-blue-500/5 border border-blue-500/20 hover:bg-blue-500/20 transition-colors group">
+<div class="h-10 w-10 rounded-full bg-blue-500 text-white flex items-center justify-center mb-3 shadow-sm group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</div>
+<span class="font-bold text-base text-gray-900 dark:text-gray-100">المدفوعات</span>
+<span class="text-xs text-text-sub-light dark:text-text-sub-dark mt-1">سجل الاشتراكات</span>
+</button>
+<button class="flex flex-col items-start p-4 rounded-2xl bg-purple-500/10 dark:bg-purple-500/5 border border-purple-500/20 hover:bg-purple-500/20 transition-colors group">
+<div class="h-10 w-10 rounded-full bg-purple-500 text-white flex items-center justify-center mb-3 shadow-sm group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">chat_bubble</span>
+</div>
+<span class="font-bold text-base text-gray-900 dark:text-gray-100">المحادثات</span>
+<span class="text-xs text-text-sub-light dark:text-text-sub-dark mt-1">تواصل مع المشرفة</span>
+</button>
+<button class="flex flex-col items-start p-4 rounded-2xl bg-green-500/10 dark:bg-green-500/5 border border-green-500/20 hover:bg-green-500/20 transition-colors group">
+<div class="h-10 w-10 rounded-full bg-green-500 text-white flex items-center justify-center mb-3 shadow-sm group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">school</span>
+</div>
+<span class="font-bold text-base text-gray-900 dark:text-gray-100">بيانات الطالب</span>
+<span class="text-xs text-text-sub-light dark:text-text-sub-dark mt-1">الحضور والغياب</span>
+</button>
+</div>
+</section>
+<!-- Recent Notifications -->
+<section>
+<div class="flex items-center justify-between mb-3 px-1">
+<h3 class="text-lg font-bold">آخر التنبيهات</h3>
+<a class="text-primary text-sm font-medium" href="#">عرض الكل</a>
+</div>
+<div class="space-y-3">
+<div class="flex items-start gap-3 p-3 rounded-xl bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark">
+<div class="h-8 w-8 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">notifications_active</span>
+</div>
+<div>
+<p class="text-sm font-medium text-text-main-light dark:text-text-main-dark">تأخر الحافلة ١٠ دقائق</p>
+<p class="text-xs text-text-sub-light dark:text-text-sub-dark mt-0.5">بسبب ازدحام مروري في شارع الملك فهد.</p>
+</div>
+<span class="text-[10px] text-text-sub-light dark:text-text-sub-dark mr-auto whitespace-nowrap">منذ 15د</span>
+</div>
+<div class="flex items-start gap-3 p-3 rounded-xl bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark">
+<div class="h-8 w-8 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+</div>
+<div>
+<p class="text-sm font-medium text-text-main-light dark:text-text-main-dark">تم وصول الطالب للمدرسة</p>
+<p class="text-xs text-text-sub-light dark:text-text-sub-dark mt-0.5">سارة وصلت بأمان الساعة ٧:٣٠ صباحاً.</p>
+</div>
+<span class="text-[10px] text-text-sub-light dark:text-text-sub-dark mr-auto whitespace-nowrap">٠٧:٣٠ ص</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 right-0 z-50 mx-auto max-w-md border-t border-border-dark bg-surface-dark/95 backdrop-blur-md px-4 pb-5 pt-3">
+<div class="flex justify-between items-center">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<span class="text-[10px] font-medium leading-none">الرئيسية</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-text-sub-dark hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">directions_bus</span>
+<span class="text-[10px] font-medium leading-none">الرحلات</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-text-sub-dark hover:text-white transition-colors relative" href="#">
+<div class="relative">
+<span class="material-symbols-outlined text-[24px]">notifications</span>
+<span class="absolute -top-0.5 -right-0.5 h-2 w-2 rounded-full bg-red-500"></span>
+</div>
+<span class="text-[10px] font-medium leading-none">الإشعارات</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-text-sub-dark hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">person</span>
+<span class="text-[10px] font-medium leading-none">الحساب</span>
+</a>
+</div>
+</nav>
+</div>
+</body></html>

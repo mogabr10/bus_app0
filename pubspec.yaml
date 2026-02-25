@@ -1,0 +1,41 @@
+name: bus_app0
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.8.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  google_fonts: ^6.2.1
+  # State Management
+  flutter_riverpod: ^2.6.1
+  riverpod_annotation: ^2.6.1
+  # Routing
+  go_router: ^14.8.1
+  # Networking
+  dio: ^5.7.0
+  # Local Storage
+  shared_preferences: ^2.3.4
+  # Functional types
+  fpdart: ^1.1.0
+  supabase_flutter: ^2.12.0
+  flutter_dotenv: ^6.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  # Code generation
+  build_runner: ^2.4.14
+  riverpod_generator: ^2.6.3
+  freezed: ^2.5.7
+  freezed_annotation: ^2.4.4
+  json_serializable: ^6.9.4
+
+flutter:
+  uses-material-design: true
+  assets:
+    - .env
